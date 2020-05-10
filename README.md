@@ -1,5 +1,5 @@
 # chromeLinuxBootstrap
-This script will bootstrap a chromebook linux container into a javascript dev env
+This script will bootstrap a chromebook linux container into a development box.
 
 if you agree to configure your machine with the script copy/paste the below command:
 ```

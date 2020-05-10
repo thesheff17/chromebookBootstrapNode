@@ -41,10 +41,17 @@ GOLANG=go1.14.2
 wget -q https://dl.google.com/go/$GOLANG.linux-amd64.tar.gz
 tar -C /usr/local -xzf $GOLANG.linux-amd64.tar.gz
 
+# rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# deno
+curl -fsSL https://deno.land/x/install/install.sh | sh
+
 # looping through home directories and adding things to .bashrc
 for f in /home/*; do
     if [ -d "$f" ]; then
         echo 'export PATH=$PATH:/usr/local/go/bin' >> $f/.bashrc
+        ssh-keygen -t rsa -f $f/.ssh/id_rsa -N '' -b 4096
     fi
 done
 
