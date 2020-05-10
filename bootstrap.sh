@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "bootstrap_lts.sh started..."
+echo "bootstrap.sh started..."
 
 NODEMODULES="serverless typescript express"
 
@@ -47,6 +47,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 # deno
 curl -fsSL https://deno.land/x/install/install.sh | sh
 
+# .bashrc entries and home dir changes
+echo 'export PATH=$PATH:/usr/local/go/bin' >> /root/.bashrc
 # looping through home directories and adding things to .bashrc
 for f in /home/*; do
     if [ -d "$f" ]; then
@@ -61,4 +63,4 @@ sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/v
 apt-get update
 apt-get install code -y
 
-echo "bootstrap_lts.sh completed"
+echo "bootstrap.sh completed"
