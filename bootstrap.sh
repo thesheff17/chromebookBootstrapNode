@@ -1,15 +1,8 @@
 #!/bin/bash
-# set -e
 
-echo "bootstrap.sh started..."
+echo "bootstrap_lts.sh started..."
 
-# we can set versions here
-NODEJS="v12.16.3"
-
-CORES=`grep 'cpu cores' /proc/cpuinfo | wc -l`
-echo "number of cores is $CORES"
-
-clear
+NODEMODULES="serverless typescript express"
 
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
@@ -19,15 +12,41 @@ fi
 # packages
 apt-get update 
 apt-get upgrade -y
-apt-get install -y python3 g++ make wget vim tmux python software-properties-common apt-transport-https wget sudo gnupg2 git
+apt-get install -y \
+    apt-transport-https \
+    curl \
+    gcc \
+    g++ \
+    git \
+    gnupg2 \
+    make \
+    python3 \
+    python3-dev \
+    software-properties-common \
+    sudo \
+    tmux \
+    vim \
+    wget 
 
-# nodejs
-wget https://nodejs.org/dist/$NODEJS/node-$NODEJS.tar.gz
-tar -xf node-$NODEJS.tar.gz
-cd node-$NODEJS
-./configure
-make -j$CORES
-make install
+# node and yarn
+curl -sL https://deb.nodesource.com/setup_12.x | bash -
+curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update
+apt-get install -y nodejs yarn
+npm install -g $NODEMODULES
+
+# golang
+GOLANG=go1.14.2
+wget -q https://dl.google.com/go/$GOLANG.linux-amd64.tar.gz
+tar -C /usr/local -xzf $GOLANG.linux-amd64.tar.gz
+
+# looping through home directories and adding things to .bashrc
+for f in /home/*; do
+    if [ -d "$f" ]; then
+        echo 'export PATH=$PATH:/usr/local/go/bin' >> $f/.bashrc
+    fi
+done
 
 # vscode
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
@@ -35,4 +54,4 @@ sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/v
 apt-get update
 apt-get install code -y
 
-echo "bootstrap.sh completed"
+echo "bootstrap_lts.sh completed"

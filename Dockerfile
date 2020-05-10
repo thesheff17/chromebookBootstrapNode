@@ -1,6 +1,6 @@
 from debian
 
-COPY bootstrap.sh /root/
+COPY bootstrapsh /root/
 RUN /root/bootstrap.sh
 
 CMD ["/bin/bash"]
