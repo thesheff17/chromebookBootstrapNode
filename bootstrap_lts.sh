@@ -35,7 +35,7 @@ sudo apt-get update
 apt-get install -y nodejs yarn
 
 # golang
-$GOLANG=go1.14.2
+GOLANG=go1.14.2
 wget -q https://dl.google.com/go$GOLANG.linux-amd64.tar.gz
 tar -C /usr/local -xzf $GOLANG-linux-am64.tar.gz
 
