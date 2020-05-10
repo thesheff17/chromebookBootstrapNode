@@ -2,7 +2,7 @@
 
 echo "bootstrap_lts.sh started..."
 
-clear
+NODEMODULES="serverless typescript"
 
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
@@ -14,6 +14,7 @@ apt-get update
 apt-get upgrade -y
 apt-get install -y \
     apt-transport-https \
+    curl \
     gcc \
     g++ \
     git \
@@ -33,6 +34,7 @@ curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt-get update
 apt-get install -y nodejs yarn
+npm install -g $NODEMODULES
 
 # golang
 GOLANG=go1.14.2
