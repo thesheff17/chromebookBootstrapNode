@@ -36,8 +36,8 @@ apt-get install -y nodejs yarn
 
 # golang
 GOLANG=go1.14.2
-wget -q https://dl.google.com/go$GOLANG.linux-amd64.tar.gz
-tar -C /usr/local -xzf $GOLANG-linux-am64.tar.gz
+wget -q https://dl.google.com/go/$GOLANG.linux-amd64.tar.gz
+tar -C /usr/local -xzf $GOLANG.linux-amd64.tar.gz
 
 # looping through home directories and adding things to .bashrc
 for f in /home/*; do
