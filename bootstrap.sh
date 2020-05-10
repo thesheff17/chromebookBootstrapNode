@@ -42,7 +42,7 @@ wget -q https://dl.google.com/go/$GOLANG.linux-amd64.tar.gz
 tar -C /usr/local -xzf $GOLANG.linux-amd64.tar.gz
 
 # rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 # deno
 curl -fsSL https://deno.land/x/install/install.sh | sh
