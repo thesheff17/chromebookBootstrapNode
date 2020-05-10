@@ -2,7 +2,7 @@
 
 echo "bootstrap_lts.sh started..."
 
-NODEMODULES="serverless typescript"
+NODEMODULES="serverless typescript express"
 
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
