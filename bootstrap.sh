@@ -53,6 +53,7 @@ echo 'export PATH=$PATH:/usr/local/go/bin' >> /root/.bashrc
 for f in /home/*; do
     if [ -d "$f" ]; then
         echo 'export PATH=$PATH:/usr/local/go/bin' >> $f/.bashrc
+        mkdir $f/.ssh/
         ssh-keygen -t rsa -f $f/.ssh/id_rsa -N '' -b 4096
     fi
 done
