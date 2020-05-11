@@ -6,5 +6,6 @@ if you agree to configure your machine with the script copy/paste the below comm
 git clone https://github.com/thesheff17/chromebookBootstrapNode.git && cd chromebookBootstrapNode && time sudo ./bootstrap.sh
 ```
 
+![CI](https://github.com/thesheff17/chromebookBootstrapNode/workflows/CI/badge.svg)
 
 
