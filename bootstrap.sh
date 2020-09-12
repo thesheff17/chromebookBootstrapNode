@@ -2,6 +2,8 @@
 
 echo "bootstrap.sh started..."
 
+SECONDS=0
+
 NODEMODULES="serverless typescript express"
 
 if [ "$EUID" -ne 0 ]
@@ -37,7 +39,7 @@ apt-get install -y nodejs yarn
 npm install -g $NODEMODULES
 
 # golang
-GOLANG=go1.14.2
+GOLANG=go1.15.2
 wget -q https://dl.google.com/go/$GOLANG.linux-amd64.tar.gz
 tar -C /usr/local -xzf $GOLANG.linux-amd64.tar.gz
 
@@ -53,7 +55,6 @@ echo 'export PATH=$PATH:/usr/local/go/bin' >> /root/.bashrc
 for f in /home/*; do
     if [ -d "$f" ]; then
         echo 'export PATH=$PATH:/usr/local/go/bin' >> $f/.bashrc
-        ssh-keygen -t rsa -f $f/.ssh/id_rsa -N '' -b 4096
     fi
 done
 
@@ -63,4 +64,6 @@ sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/v
 apt-get update
 apt-get install code -y
 
+duration=$SECONDS
+echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
 echo "bootstrap.sh completed"
