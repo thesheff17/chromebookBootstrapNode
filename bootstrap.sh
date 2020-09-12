@@ -68,10 +68,6 @@ for f in /home/*; do
     if [ -d "$f" ]; then
         echo 'export PATH=$PATH:/usr/local/go/bin' >> $f/.bashrc
         # echo 'export PATH=$PATH:$HOME/.cargo/bin' >> $f/.bashrc
-
-        echo "#!/bin/sh" > $f/
-
-        RUSTUP_HOME=/opt/rust exec /opt/rust/bin/${0##*/} "$@"
     fi
 done
 
