@@ -52,10 +52,12 @@ curl -fsSL https://deno.land/x/install/install.sh | sh
 
 # .bashrc entries and home dir changes
 echo 'export PATH=$PATH:/usr/local/go/bin' >> /root/.bashrc
+echo 'export PATH=$PATH:$HOME/.cargo/bin' >> /root/.bashrc
 # looping through home directories and adding things to .bashrc
 for f in /home/*; do
     if [ -d "$f" ]; then
         echo 'export PATH=$PATH:/usr/local/go/bin' >> $f/.bashrc
+        echo 'export PATH=$PATH:$HOME/.cargo/bin' >> $f/.bashrc
     fi
 done
 
