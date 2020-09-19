@@ -24,6 +24,7 @@ apt-get install -y \
     gcc \
     git \
     gnupg2 \
+    htop \
     locate \
     make \
     python3 \
