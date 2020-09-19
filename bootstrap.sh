@@ -48,7 +48,7 @@ tar -C /usr/local -xzf $GOLANG.linux-amd64.tar.gz
 mkdir /opt/rust && \
   export RUST_HOME=/opt/rust && \
   export CARGO_HOME=/opt/rust && \
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+  curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
 
 # deno
 curl -fsSL https://deno.land/x/install/install.sh | sh
