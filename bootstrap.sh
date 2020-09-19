@@ -2,9 +2,11 @@
 
 echo "bootstrap.sh started..."
 
-SECONDS=0
-
+# vars we can change quickly
+GOLANG=go1.15.2
 NODEMODULES="serverless typescript express"
+
+SECONDS=0
 
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
@@ -17,10 +19,12 @@ apt-get upgrade -y
 apt-get install -y \
     apt-transport-https \
     curl \
-    gcc \
+    default-mysql-server \
     g++ \
+    gcc \
     git \
     gnupg2 \
+    locate \
     make \
     python3 \
     python3-dev \
@@ -39,8 +43,13 @@ sudo apt-get update
 apt-get install -y nodejs yarn
 npm install -g $NODEMODULES
 
+# postgres
+sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+apt-get update
+apt-get -y install postgresql
+
 # golang
-GOLANG=go1.15.2
 wget -q https://dl.google.com/go/$GOLANG.linux-amd64.tar.gz
 tar -C /usr/local -xzf $GOLANG.linux-amd64.tar.gz
 
@@ -70,6 +79,9 @@ wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add
 sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 apt-get update
 apt-get install code -y
+
+# update database
+updatedb
 
 duration=$SECONDS
 echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
