@@ -59,7 +59,8 @@ echo 'source $HOME/.cargo/env' >> /root/.bashrc
 for f in /home/*; do
     if [ -d "$f" ]; then
         echo 'export PATH=$PATH:/usr/local/go/bin' >> $f/.bashrc
-        su - $f -c 'curl https://sh.rustup.rs -sSf | sh -s -- -y'
+        user=$(echo $f | sed 's:.*/::')
+        su - $user -c 'curl https://sh.rustup.rs -sSf | sh -s -- -y'
         echo 'source $HOME/.cargo/env' >> $f/.bashrc
     fi
 done
