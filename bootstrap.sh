@@ -45,24 +45,24 @@ wget -q https://dl.google.com/go/$GOLANG.linux-amd64.tar.gz
 tar -C /usr/local -xzf $GOLANG.linux-amd64.tar.gz
 
 # rust
-mkdir /opt/rust && \
-  export RUST_HOME=/opt/rust && \
-  export CARGO_HOME=/opt/rust && \
-  curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # deno
 curl -fsSL https://deno.land/x/install/install.sh | sh
 
 # .bashrc entries and home dir changes
 echo 'export PATH=$PATH:/usr/local/go/bin' >> /root/.bashrc
-echo 'source /opt/rust/env' >> /root/.bashrc
+echo 'source $HOME/.cargo/env' >> /root/.bashrc
 
 # echo 'export PATH=$PATH:$HOME/.cargo/bin' >> /root/.bashrc
 # looping through home directories and adding things to .bashrc
 for f in /home/*; do
     if [ -d "$f" ]; then
         echo 'export PATH=$PATH:/usr/local/go/bin' >> $f/.bashrc
-        echo 'source /opt/rust/env' >> $f/.bashrc
+        echo 'source $HOME/.cargo/env' >> $f/.bashrc
+        sudo -u $f "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+
+
     fi
 done
 
