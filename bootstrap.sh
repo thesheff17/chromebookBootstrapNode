@@ -45,7 +45,9 @@ wget -q https://dl.google.com/go/$GOLANG.linux-amd64.tar.gz
 tar -C /usr/local -xzf $GOLANG.linux-amd64.tar.gz
 
 # rust
-sudo su
+mkdir /opt/rust && \
+  export RUST_HOME=/opt/rust && \
+  export CARGO_HOME=/opt/rust && \
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 # deno
