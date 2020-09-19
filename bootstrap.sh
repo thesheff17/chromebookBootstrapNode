@@ -5,6 +5,7 @@ echo "bootstrap.sh started..."
 # vars we can change quickly
 GOLANG=go1.15.2
 NODEMODULES="serverless typescript express"
+PIPPACKAGES="ansible boto3"
 
 SECONDS=0
 
@@ -31,10 +32,14 @@ apt-get install -y \
     python3-dev \
     python3-pip \
     software-properties-common \
+    ssh \
     sudo \
     tmux \
     vim \
     wget 
+
+# global pip packages
+pip3 install $PIPPACKAGES
 
 # node and yarn
 curl -sL https://deb.nodesource.com/setup_12.x | bash -
